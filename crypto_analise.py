@@ -2,10 +2,10 @@ import streamlit as st
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
-
+''
 # 1. Configuração da página
 st.set_page_config(
-    page_title="Crypto Analise", 
+    page_title="Crypto Analise ", 
     page_icon="🪙", 
     layout="centered", 
     initial_sidebar_state="collapsed"
@@ -92,7 +92,7 @@ def plotar_grafico(df, titulo, cor_linha, ax, label_fiat):
 
 # --- INTERFACE PRINCIPAL ---
 def main():
-    st.markdown("<h1 style='text-align: center;'>🪙 Crypto Dashboard</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>🪙 Crypto Analise </h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: #a0aec0; font-size: 18px;'>Acompanhe e compare o mercado em tempo real</p>", unsafe_allow_html=True)
     
     st.info("💡 **Dica de Ouro:** Digite até duas moedas separadas por vírgula para comparar (ex: `bitcoin, ethereum`).")
