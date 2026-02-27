@@ -44,7 +44,7 @@ url("https://images.unsplash.com/photo-1609554496796-c345a5331ce1?q=80&w=1920&au
     unsafe_allow_html=True
 )
 
-# --- FUNÇÕES DE BUSCA (AGORA ACEITAM A MOEDA ESCOLHIDA) ---
+
 def buscar_dados(coin_id: str, dias: int = 30, moeda_fiat: str = "usd"):
     url = f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart"
     params = {"vs_currency": moeda_fiat, "days": dias}
@@ -98,7 +98,7 @@ def main():
     st.info("💡 **Dica de Ouro:** Digite até duas moedas separadas por vírgula para comparar (ex: `bitcoin, ethereum`).")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # --- NOVO LAYOUT DO PAINEL DE CONTROLE (Com seleção de moeda) ---
+    # PAINEL DE CONTROLE (Com seleção de moeda) ---
     col1, col2, col3 = st.columns([2, 1, 1])
     
     with col1:
@@ -122,7 +122,7 @@ def main():
     analisar_btn = st.button("🚀 Analisar Mercado", use_container_width=True, type="primary")
     st.divider()
 
-    # --- LÓGICA DE EXIBIÇÃO ---
+    # -EXIBIÇÃO ---
     if analisar_btn:
         if not entrada:
             st.warning("⚠️ Por favor, digite ao menos uma moeda.")
@@ -137,7 +137,7 @@ def main():
         with st.spinner('Analisando o mercado... ⏳'):
             dados_hist = {}
             for moeda in moedas:
-                # Passando a moeda (usd/brl) escolhida para a API do histórico
+                
                 df = buscar_dados(moeda, dias, moeda_fiat)
                 if df is not None:
                     dados_hist[moeda] = df
@@ -147,7 +147,7 @@ def main():
 
             if modo == "Preço Atual ⚡":
                 st.subheader(f"💰 Cotação em Tempo Real (Tendência de {dias} dias)")
-                # Passando a moeda (usd/brl) escolhida para a API de preço atual
+                
                 dados_atuais = buscar_preco_atual(moedas, moeda_fiat)
                 
                 colunas_metricas = st.columns(len(moedas))
@@ -175,7 +175,7 @@ def main():
                     with colunas_metricas[i]:
                         st.metric(label=f"{moeda.upper()} (Último fechamento)", value=f"{simbolo} {preco_final:,.4f}", delta=f"{variacao:.2f}%")
 
-            # --- RENDERIZANDO OS GRÁFICOS ---
+    # GRÁFICOS ---
             fig_bg_color = 'none' 
 
             if len(moedas) == 1:
